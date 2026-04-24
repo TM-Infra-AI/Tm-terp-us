@@ -1,4 +1,4 @@
-name: Deploy to t-erp.us
+name: Deploy to t-erp.us (via SCP)
 
 on:
   push:
@@ -23,11 +23,13 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -p 22999 -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy via Rsync
+      - name: Deploy via SCP
         run: |
-          # Fast deployment using Rsync on port 22999
-          rsync -avz -e "ssh -p 22999" \
-            --exclude='.git/' \
-            --exclude='.github/' \
-            --exclude='t_erp_key*' \
-            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/t-erp.us/
+          # 1. Runner me se extra files delete karein taaki wo cPanel pe na jayein
+          # Isme hum t_erp_key ko bhi delete kar rahe hain taaki wo server pe na jaye
+          shopt -s dotglob
+          rm -rf .git .github etc logs mail images public_ftp ssl tmp access-logs *.zip t_erp_key*
+          
+          # 2. Files ko cPanel ke target folder (~/t-erp.us/) me bhej dein
+          # Port 22999 aur Capital -P use kiya hai
+          scp -P 22999 -v -q -r * ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/t-erp.us/
