@@ -1,0 +1,25 @@
+
+RewriteOptions inherit
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^t\-erp\.us$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.t\-erp\.us$
+RewriteRule ^TERP\-Video$ "https\:\/\/youtu\.be\/QtuZ5l8sNtA" [R=301,L]
+RewriteCond %{HTTP_HOST} ^t\-erp\.us$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.t\-erp\.us$
+RewriteRule ^AIInvoiceProcessing\-demo$ "https\:\/\/youtu\.be\/gZZ73KV1oUI" [R=301,L]
+RewriteCond %{HTTP_HOST} ^t\-erp\.us$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.t\-erp\.us$
+RewriteRule ^AITileFinder\-demo$ "https\:\/\/youtu\.be\/L1Qq2TaSc10" [R=301,L]
+RewriteCond %{HTTP_HOST} ^t\-erp\.us$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.t\-erp\.us$
+RewriteRule ^AISDR\-demo\ $ "https\:\/\/youtu\.be\/5pdGQ5XHmWQ" [R=301,L]
+RewriteCond %{HTTP_HOST} ^t\-erp\.us$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.t\-erp\.us$
+RewriteRule ^AISDR\-demo\ $ "https\:\/\/youtu\.be\/5pdGQ5XHmWQ\[\/i\]" [R=301,L]
+RewriteCond %{HTTP_HOST} ^t\-erp\.us$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.t\-erp\.us$
+RewriteRule ^AIChatbot\-demo$ "https\:\/\/www\.youtube\.com\/watch\?v\=5pdGQ5XHmWQ" [R=301,L]
+RewriteCond %{HTTP_HOST} ^t\-erp\.us$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.t\-erp\.us$
+RewriteRule ^AISDR\-demo$ "https\:\/\/www\.youtube\.com\/watch\?v\=0vkp_qdAq6I" [R=301,L]
