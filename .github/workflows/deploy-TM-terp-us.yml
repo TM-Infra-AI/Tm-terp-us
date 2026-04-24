@@ -1,0 +1,33 @@
+name: Deploy to t-erp.us
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p 22999 -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy via Rsync
+        run: |
+          # Fast deployment using Rsync on port 22999
+          rsync -avz -e "ssh -p 22999" \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='t_erp_key*' \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/t-erp.us/
